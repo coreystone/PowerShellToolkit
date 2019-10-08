@@ -1,3 +1,3 @@
 @echo off
-Powershell.exe -ExecutionPolicy Bypass -File  "path\AutoFreshImage.ps1"
+Powershell.exe -ExecutionPolicy Bypass -File  "\\domain\AutoFreshImage.ps1"
 pause

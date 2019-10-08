@@ -1,58 +1,49 @@
-# Authenticate and map PSDrive to dev\software
-$connected = $false
-while (!$connected) {
-    try
-    {
-        $credential = Get-Credential
-        $credential = New-Object System.Management.Automation.PsCredential($credential.Username,  $credential.Password)
-        New-PSDrive -name “X” -PSProvider FileSystem -Root  \\domain\ZScaler -Persist -Credential $credential
-        $connected = $true
-    }
+Write-Host
+Write-Host Beginning Auto zScaler script
+Write-Host 'Updated 08/29/19; tested on Windows 7, 8, 10, Server 2012 R2'
 
-    catch
-    {
-	    Write-Host Could not connect to \\domain; make sure your credentials are correct
-	    $userExit = Read-Host ‘Do you want to try again? (y/n)’
-
-	    while ($userExit -notin (“y”, “n”)) {
-		    $userExit = Read-Host ‘Invalid input; do you want to try again? (y/n)’
-
-		    if ($userExit -eq “n”) {
-			    if (Get-PSDrive “X” -ErrorAction SilentlyContinue) {
-			        Remove-PSDrive -name "X" -Force
-                    exit
-		        }
-            }
-    
-        }
-    }
+$validRegion = $false
+while (!$validRegion) {
+    Write-Host 'NAM = USA, Mexico, Canada'
+    Write-Host 'IN  = India'
+    $region = (Read-Host 'Before the script can begin, enter your region (NAM/IN)').ToLower()
+    if ($region -in ('nam', 'in')) {$validRegion = $true}
+    else {Write-Host Invalid region, enter NAM or IN}
 }
 
-Write-Host Authenticated and connected to \\domain
 
-# Add the configuration script
+# Add the configuration script for corresponding region
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v AutoConfigURL /t REG_SZ /d "http://PACFILE.pac" /f
-Write-Host Modified auto-configuration script
+
+
+Write-Host Modified auto-configuration script for $region.ToUpper()
 
 
 # Import the certificate
-try {
-    X:
-    $zScalerCert = (Get-ChildItem -Path 'CERT.crt')
-    $zScalerCert | Import-Certificate -CertStoreLocation Cert:\CurrentUser\Root
-    Write-Host Imported zScaler root certificate
+$imported = $false
+while (!$imported) {
+    try {
+        $zScalerCert = Get-Item \\domain\cert.crt -ErrorAction Stop 
+        $zScalerCert | Import-Certificate -CertStoreLocation Cert:\CurrentUser\Root -ErrorAction Stop
+        Write-Host Imported zScaler root certificate
+        $imported = $true
+           
+        Write-Host zScaler setup complete
+    }
+
+    catch {
+	    $userExit = (Read-Host 'Could not import root certificate; file may have been moved or your credentials are incorrect. Do you want to try again? (y/n)').ToLower()
+
+	    while ($userExit -notin ('y', 'n')) {
+		    $userExit = Read-Host ('Invalid input; do you want to try again? (y/n)').ToLower()
+	    }
+
+	    if ($userExit -eq 'n') {
+		    Read-Host Successfully closing the program, press any key to exit...
+            exit
+	    }
+    }
 }
 
-catch {
-    Write-Host Could not import root certificate; file may have been moved
-    Remove-PSDrive -name "X" -Force
-    Read-Host "Press any key to exit..." 
-    Exit
-}
-
-
-# Unmap the PSDrive
-Remove-PSDrive -name "X" -Force
-Write-Host zScaler successfully configured
 
 

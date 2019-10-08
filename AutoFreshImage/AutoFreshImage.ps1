@@ -1,7 +1,3 @@
-# Updated 08/29/19 
-# AutoFreshImage is a script created to automate much of the imaging process for new machines that do not have an existing image.
-# It configures the desired Windows settings and installs software for a base R&D machine. 
-
 $validRegion = $false
 while (!$validRegion) {
     Write-Host 'NAM = USA, Mexico, Canada'
@@ -13,7 +9,7 @@ while (!$validRegion) {
 
 
 # Add the configuration script for corresponding region
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v AutoConfigURL /t REG_SZ /d "pat/PACFILE" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v AutoConfigURL /t REG_SZ /d "pacfile.pac" /f
 Write-Host Modified auto-configuration script for $region.ToUpper()
 
 
@@ -21,7 +17,7 @@ Write-Host Modified auto-configuration script for $region.ToUpper()
 $imported = $false
 while (!$imported) {
     try {
-        $zScalerCert = Get-Item \\domain\\certfile.crt -ErrorAction Stop 
+        $zScalerCert = Get-Item \\domain\CERT.crt -ErrorAction Stop 
         $zScalerCert | Import-Certificate -CertStoreLocation Cert:\CurrentUser\Root -ErrorAction Stop
         Write-Host Imported zScaler root certificate
         $imported = $true
@@ -67,66 +63,34 @@ Write-Host Disabled IPv6 for each network adapter
 c:\windows\system32\powercfg.exe -change -standby-timeout-ac 0
 Write-Host Sleep mode when plugged-in disabled
 
-# Create devadministrator
-#$devadminPassword = Read-Host -AsSecureString 'Enter devadministrator password (or enter to skip)'
-#if ($devadminPassword -ne "") {
-#    New-LocalUser "devadministrator" -Password $devadminPassword -PasswordNeverExpires -UserMayNotChangePassword
-#    Add-LocalGroupMember -Group "Administrators" -Member "devadministrator"
-#    Write-Host devadministrator local account created
-#}
 
 $credential = Get-Credential
 $credential = New-Object System.Management.Automation.PsCredential($credential.Username,  $credential.Password)
 
-# Add computer to domain
-#Add-Computer -ComputerName $env:computername -LocalCredential $credential -DomainName dom -Credential $credential
-#Write-Host Computer joined to  domain
-
-
-# Add CORP account to local Administrators
-#$DomainUser = Read-Host 'Enter the CORP account to add to Administrators (or Enter to skip)'
-#if ($DomainUser -ne "") {
-#    $LocalGroup = 'Administrators'
-#    $Computer   = $env:computername
-#    $Domain     = $env:userdomain
-#    ([ADSI]"WinNT://$Computer/$LocalGroup,group").psbase.Invoke("Add",([ADSI]"WinNT://$Domain/$DomainUser").path)
-#    Write-Host $DomainUser added to Administrators group
-#}
 
 
 # Rename computer
-$name = Read-Host 'NEW COMPUTER NAME (or Enter to skip)'
-if ($name -ne "") {Rename-Computer -NewName $newComputerName -DomainCredential $credential.Username}
-Write-Host Computer renamed to $name
-
-
-#  Authenticate and map PSDrive to dev\software
-#$credential = Get-Credential
-#$credential = New-Object System.Management.Automation.PsCredential($credential.Username, $credential.Password)
-#New-PSDrive -name "X" -PSProvider FileSystem -Root \\domain\software -Persist -Credential $credential
-#X:
+#$newComputerName = Read-Host 'NEW COMPUTER NAME (or Enter to skip)'
+#if ($name -ne "") {Rename-Computer -NewName $newComputerName -DomainCredential $credential.Username}
+#Write-Host Computer renamed to $newComputerName
 
 
 # Install McAfee agent
-Start-Process -FilePath '\\domain\AgentInstall\McAfeeAgent.exe'
-Write-Host McAfee EPO Agent installed
+#Start-Process -FilePath '\\domain\mcafee.exe'
+#Write-Host McAfee EPO Agent installed
 
 
 # Install VirusScan Enterprise
-Start-Process -FilePath '\\domain\McAfeeAntiVirus.exe'
+Start-Process -FilePath '\\domain\mcafeeepo.exe'
 Write-Host McAfee VirusScan Enterprise installed
 
 
 # Download SAP
-Start-Process -FilePath '\\domain\SAP.exeù'
+Start-Process -FilePath '\\domain\sap.exeù'
 Write-Host SAP installed
 
 # Download O365
-C:
-$url = "office365.exe"
-$output = "C:\Program Files\invofficedeployment.exe"
-Invoke-WebRequest -Uri $url -OutFile $output
-Invoke-Item $output
+Invoke-Item "\\domain\o365.exe"
 Write-Host Office 365 installed
 
 
@@ -144,3 +108,4 @@ choco install adobereader -y
 Write-Host Installed Adobe Acrobat Reader DC
 choco install javaruntime -y
 Write-Host Installed JRE
+
