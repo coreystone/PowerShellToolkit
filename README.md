@@ -1,7 +1,7 @@
 # PowerShellToolkit
 A suite of PowerShell scripts to make my job easier. Includes proxy configurations, database and Active Directory queries, readme generation, software installations, and others. All encapsulated into a simple-to-use GUI.
 
-# Introduction
+## Introduction
 This is a suite of scripts I authored in PowerShell to address many common problems/tasks that my team and I encounter. 
 The project started out as a few lone scripts but later evolved into the toolkit that this is today. It may seem ironic to 
 encapsulate a scripting language into a GUI that requires manual input, but I thought a GUI was an excellent medium to 
@@ -11,7 +11,7 @@ the project, and is simply more intuitive for others using it (my team).
 This project was my first real introduction to PowerShell and has been a really enjoyable experience, so I am definitely going to 
 continue to use PowerShell to solve my problems in the future.
 
-# Included Scripts & Amenities
+## Included Scripts & Amenities
 * Tab functionality to organize tools 
 * Table of system specifications and compliance information
 * Table of installed programs and versions
@@ -25,4 +25,4 @@ continue to use PowerShell to solve my problems in the future.
 * Various network troubleshooting commands
 * Internal links, contacts, and other information for reference
 
-# Walkthrough
+## Walkthrough
