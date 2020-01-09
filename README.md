@@ -26,3 +26,14 @@ continue to use PowerShell to solve my problems in the future.
 * Internal links, contacts, and other information for reference
 
 ## Walkthrough
+![alt text](https://github.com/coreystone/PowerShellToolkit/blob/master/computer_tab.PNG "")
+
+![alt text](https://github.com/coreystone/PowerShellToolkit/blob/master/database_tab.PNG "")
+
+![alt text](https://github.com/coreystone/PowerShellToolkit/blob/master/utilities_tab.PNG "")
+
+
+## Tools Used
+* **System.Windows.Forms** to create buttons, windows, and other GUI functionality
+* **OLDEB** (Microsoft's SQL API) to query asset database
+* Batch files to run existing scripts located in a network share
