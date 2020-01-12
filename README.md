@@ -11,6 +11,13 @@ the project, and is simply more intuitive for others using it (my team).
 This project was my first real introduction to PowerShell and has been a really enjoyable experience, so I am definitely going to 
 continue to use PowerShell to solve my problems in the future.
 
+## Walkthrough
+![alt text](https://github.com/coreystone/PowerShellToolkit/blob/master/computer_tab.PNG "")
+
+![alt text](https://github.com/coreystone/PowerShellToolkit/blob/master/database_tab.PNG "")
+
+![alt text](https://github.com/coreystone/PowerShellToolkit/blob/master/utilities_tab.PNG "")
+
 ## Included Scripts & Amenities
 * Tab functionality to organize tools 
 * Table of system specifications and compliance information
@@ -25,4 +32,7 @@ continue to use PowerShell to solve my problems in the future.
 * Various network troubleshooting commands
 * Internal links, contacts, and other information for reference
 
-## Walkthrough
+## Tools Used
+* **System.Windows.Forms** to create buttons, windows, and other GUI functionality
+* **OLDEB** (Microsoft's SQL API) to query asset database
+* Batch files to run existing scripts located in a network share
