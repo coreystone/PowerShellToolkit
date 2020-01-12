@@ -25,7 +25,7 @@ continue to use PowerShell to solve my problems in the future.
 * Insert new records and attributes into database
 * Query asset database and view results in table
 * Format USB drives, add OS/program as bootable
-* Query Active Directory computers to find OU, Active status
+* Query Active Directory computers to find OU, DC's, and Active status
 * Configure proxies for security and updates
 * Generate inventory reports, README's 
 * Check for group policy and Windows licensing compliance
