@@ -11,9 +11,10 @@ the project, and is simply more intuitive for others using it (my team).
 This project was my first real introduction to PowerShell and has been a really enjoyable experience, so I am definitely going to 
 continue to use PowerShell to solve my problems in the future.
 
-## Walkthrough
+## Demo
 ![alt text](https://github.com/coreystone/PowerShellToolkit/blob/master/demo.gif "")
 
+## Walkthrough
 ![alt text](https://github.com/coreystone/PowerShellToolkit/blob/master/computer_tab.PNG "")
 
 ![alt text](https://github.com/coreystone/PowerShellToolkit/blob/master/database_tab.PNG "")
