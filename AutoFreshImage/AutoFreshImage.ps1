@@ -39,7 +39,6 @@ while (!$imported) {
 }
 
 
-
 # Disable auto reboot
 $regkeypath="HKLM:\SYSTEM\CurrentControlSet\Control\CrashControl"
 Set-ItemProperty -Path $regkeypath -Name "AutoReboot" -Value 0
@@ -68,25 +67,13 @@ $credential = Get-Credential
 $credential = New-Object System.Management.Automation.PsCredential($credential.Username,  $credential.Password)
 
 
-
-# Rename computer
-#$newComputerName = Read-Host 'NEW COMPUTER NAME (or Enter to skip)'
-#if ($name -ne "") {Rename-Computer -NewName $newComputerName -DomainCredential $credential.Username}
-#Write-Host Computer renamed to $newComputerName
-
-
-# Install McAfee agent
-#Start-Process -FilePath '\\domain\mcafee.exe'
-#Write-Host McAfee EPO Agent installed
-
-
 # Install VirusScan Enterprise
 Start-Process -FilePath '\\domain\mcafeeepo.exe'
 Write-Host McAfee VirusScan Enterprise installed
 
 
 # Download SAP
-Start-Process -FilePath '\\domain\sap.exeù'
+Start-Process -FilePath '\\domain\sap.exe¬ù'
 Write-Host SAP installed
 
 # Download O365
