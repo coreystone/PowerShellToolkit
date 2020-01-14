@@ -4,7 +4,7 @@
 # The GUI allows users to select the network folder corresponding to the machine the readme is being created for, and to enter their initials and a note detailing what's new in the readme.
 
 
-# Authenticate and map PSDrive to devnas13\images
+# Authenticate and map PSDrive to domain
 $connected = $false
 while (!$connected) {
     try {
@@ -14,11 +14,8 @@ while (!$connected) {
         $credential = Get-Credential
         $credential = New-Object System.Management.Automation.PsCredential($credential.Username,  $credential.Password)
 
-        New-PSDrive -name "N" -PSProvider FileSystem -Root  \\devnas13.dev.wonderware.com\images -Persist -Credential $credential
-        #$connectionError = $Error[0].Exception.GetType().FullName
-        
-        #if ($connectionError -ne "") {-ErrorAction "Stop"}
-        $connected = $true
+        New-PSDrive -name "N" -PSProvider FileSystem -Root  \\domain\imagefolder -Persist -Credential $credential     
+	$connected = $true
     }
 
     catch {
@@ -103,7 +100,7 @@ function browse {
  
      #############Define default values for the input boxes
      $defaultValue = ""
-     $textBox1.Text = "\\devnas13.dev.wonderware.com\IMAGES\";;
+     $textBox1.Text = "\\domain\imagefolder";;
      $textBox2.Text = "";
      $textBox3.Text = "";
  
@@ -197,8 +194,8 @@ $hostname = (gwmi win32_operatingsystem).pscomputername
 Add-Content $path "TEMP(BASE) HOSTNAME: $hostname"
 
 Add-Content $path "
-        MUST CHANGE [computer name] and add to [DEV domain]!
-        CHANGE [DevLOCAL] password!
+        MUST CHANGE [computer name] and add to [domain]!
+        CHANGE [USERNAME] password!
 
 TEMP(BASE) DEVLOCAL pass = SANITIZED"
 
