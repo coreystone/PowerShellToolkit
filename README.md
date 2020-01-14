@@ -12,11 +12,19 @@ This project was my first real introduction to PowerShell and has been a really 
 continue to use PowerShell to solve my problems in the future.
 
 ## Walkthrough
+![alt text](https://github.com/coreystone/PowerShellToolkit/blob/master/demo.gif "")
+
 ![alt text](https://github.com/coreystone/PowerShellToolkit/blob/master/computer_tab.PNG "")
 
 ![alt text](https://github.com/coreystone/PowerShellToolkit/blob/master/database_tab.PNG "")
 
 ![alt text](https://github.com/coreystone/PowerShellToolkit/blob/master/utilities_tab.PNG "")
+
+![alt text](https://github.com/coreystone/PowerShellToolkit/blob/master/autoreadme.PNG "")
+
+![alt text](https://github.com/coreystone/PowerShellToolkit/blob/master/assetreport.PNG "")
+
+![alt text](https://github.com/coreystone/PowerShellToolkit/blob/master/zscaler.png "")
 
 ## Included Scripts & Amenities
 * Tab functionality to organize tools 
